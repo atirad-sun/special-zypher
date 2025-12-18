@@ -41,9 +41,41 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+  // Define the schema for your company
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'ONE EIGHT X',
+    url: 'https://oneeightx.com',
+    logo: 'https://www.oneeightx.com/asset/logo.svg', // Replace with your actual logo URL
+    description: 'We help forward-thinking companies launch fast, scalable, and secure digital products.',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Bangkok',
+      addressCountry: 'TH',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+66-80-221-8181', // Optional: Your business phone
+      contactType: 'customer service',
+    },
+    sameAs: [
+      'https://www.facebook.com/oneeightx', // Add your social links here
+      'https://www.linkedin.com/company/oneeightx',
+    ],
+  }
+
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        {/* Add the JSON-LD script here */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
       <GoogleAnalytics gaId="G-N0FZQC018G" />
     </html>
   );
