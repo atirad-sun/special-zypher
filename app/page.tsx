@@ -3,10 +3,52 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  ArrowRight,CheckCircle,Code,Globe,Shield,Zap,Mail,MapPin,Phone,Send,Landmark,Blocks,FileCheck,Rocket,
+  ArrowRight,
+  CheckCircle,
+  Code,
+  Globe,
+  Shield,
+  Zap,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  Landmark,
+  Blocks,
+  FileCheck,
+  Rocket,
 } from "lucide-react";
+import { useForm, ValidationError } from "@formspree/react";
 
 export default function Home() {
+  // 1. Setup Formspree
+  const [state, handleSubmit] = useForm("xpqaavvv");
+
+  // 2. Success State: What to show after they send a message
+  if (state.succeeded) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="text-center p-10 bg-white rounded-2xl shadow-xl border border-slate-200">
+          <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckCircle className="w-8 h-8" />
+          </div>
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">
+            Message Sent!
+          </h2>
+          <p className="text-slate-600 mb-6">
+            Thanks for reaching out. We'll get back to you shortly.
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-6 py-2 bg-brand text-white rounded-full font-semibold"
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-brand selection:text-white">
       {/* Navigation */}
@@ -16,7 +58,7 @@ export default function Home() {
             {/* Logo Placeholder - Replace src with your file path later */}
             <img
               src="asset/logo.svg"
-              alt="My Company Logo"
+              alt="ONE EIGHT X Logo"
               className="h-8 w-auto"
             />
             {/* <span>
@@ -158,6 +200,173 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Contact Section */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16">
+            {/* Left: Contact Info */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-slate-900">
+                Let's work together.
+              </h2>
+              <p className="text-slate-600 mb-8 text-lg">
+                Ready to start your next project? Fill out the form or reach out
+                to us directly.
+              </p>
+
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand shadow-sm border border-slate-100">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-sm text-slate-500 font-medium">
+                      Email
+                    </div>
+                    <a
+                      href="mailto:contact@oneeightx.com"
+                      className="text-slate-900 font-semibold hover:text-brand"
+                    >
+                      contact@oneeightx.com
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand shadow-sm border border-slate-100">
+                    <Phone className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-sm text-slate-500 font-medium">
+                      Phone
+                    </div>
+                    <a
+                      href="tel:+66802218181"
+                      className="text-slate-900 font-semibold hover:text-brand"
+                    >
+                      +66 80-221-8181
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand shadow-sm border border-slate-100">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-sm text-slate-500 font-medium">
+                      Office
+                    </div>
+                    <div className="text-slate-900 font-semibold">
+                      Bangkok, Thailand
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: The Form (Connected to Formspree) */}
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white p-8 rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/50"
+            >
+              <div className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      htmlFor="firstName"
+                      className="block text-sm font-medium text-slate-700 mb-2"
+                    >
+                      First Name
+                    </label>
+                    <input
+                      id="firstName"
+                      name="firstName"
+                      type="text"
+                      className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all"
+                      placeholder="John"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="lastName"
+                      className="block text-sm font-medium text-slate-700 mb-2"
+                    >
+                      Last Name
+                    </label>
+                    <input
+                      id="lastName"
+                      name="lastName"
+                      type="text"
+                      className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all"
+                      placeholder="Doe"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-slate-700 mb-2"
+                  >
+                    Email Address
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all"
+                    placeholder="john@example.com"
+                  />
+                  <ValidationError
+                    prefix="Email"
+                    field="email"
+                    errors={state.errors}
+                    className="text-red-500 text-sm mt-1"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-slate-700 mb-2"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all"
+                    placeholder="Tell us about your project..."
+                  ></textarea>
+                  <ValidationError
+                    prefix="Message"
+                    field="message"
+                    errors={state.errors}
+                    className="text-red-500 text-sm mt-1"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={state.submitting}
+                  className="w-full py-4 bg-brand text-white font-bold rounded-lg hover:bg-teal-700 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {state.submitting ? "Sending..." : "Send Message"}
+                  {!state.submitting && <Send className="w-4 h-4" />}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* Simple Footer */}
+      <footer className="py-8 bg-white border-t border-slate-200 text-center text-slate-500 text-sm">
+        © 2026 ONE EIGHT X COMPANY LIMITED. All rights reserved.
+      </footer>
     </div>
   );
 }

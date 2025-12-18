@@ -1,12 +1,29 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css"; // This connects the CSS file above
 
 const font = Plus_Jakarta_Sans({ subsets: ["latin"] });
 
+export const viewport: Viewport = {
+  themeColor: "#00675b",
+};
+
 export const metadata: Metadata = {
-  title: "ONE EIGHT X - Digital Solution for business",
-  description: "Professional IT and Digital Transformation to your business",
+  title: {
+    template: '%s | ONE EIGHT X', // %s will be replaced by specific page titles
+    default: 'ONE EIGHT X - Software Development & Digital Solutions', // Default home title
+  },
+  description: "We help forward-thinking companies launch fast, scalable, and secure digital products. Web Development, Mobile Apps, and Cloud Infrastructure.",
+  keywords: ["Software Development", "React", "Next.js", "Thailand", "Web Development", "Mobile App"],
+  authors: [{ name: "ONE EIGHT X Team" }],
+  openGraph: {
+    title: 'ONE EIGHT X - Software Development & Digital Solutions',
+    description: 'Building digital experiences that matter. Trusted by top companies in Thailand.',
+    url: 'https://oneeightx.com', // Update this when you have a real domain
+    siteName: 'ONE EIGHT X',
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
