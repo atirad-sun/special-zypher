@@ -1,65 +1,194 @@
-import Image from "next/image";
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,CheckCircle,Code,Globe,Shield,Zap,Mail,MapPin,Phone,Send,Landmark,Blocks,FileCheck,Rocket,
+} from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-brand selection:text-white">
+      {/* Navigation */}
+      <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2 font-bold text-xl tracking-tighter">
+            {/* Logo Placeholder - Replace src with your file path later */}
+            <img
+              src="asset/logo.svg"
+              alt="My Company Logo"
+              className="h-8 w-auto"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            {/* <span>
+              Company<span className="text-brand">Name</span>
+            </span> */}
+          </div>
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+            <a href="#" className="hover:text-brand transition-colors">
+              Services
+            </a>
+            <a href="#" className="hover:text-brand transition-colors">
+              About
+            </a>
+            <a href="#" className="hover:text-brand transition-colors">
+              Process
+            </a>
+            <button className="px-5 py-2 bg-slate-900 text-white rounded-full hover:bg-brand transition-colors">
+              Contact Us
+            </button>
+          </div>
         </div>
-      </main>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 px-6">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 text-brand text-xs font-semibold mb-6 border border-teal-100">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
+              </span>
+              Accepting New Projects for 2026
+            </div>
+            <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 text-slate-900">
+              Building digital <br />
+              <span className="text-brand">experiences</span> that matter.
+            </h1>
+            <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
+              We help forward-thinking companies launch fast, scalable, and
+              secure digital products using cutting-edge technology.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <button className="px-8 py-4 bg-brand text-white rounded-full font-semibold hover:bg-teal-700 transition-all flex items-center gap-2 shadow-lg shadow-teal-900/20">
+                Start Your Project <ArrowRight className="w-4 h-4" />
+              </button>
+              <button className="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-full font-semibold hover:bg-slate-50 transition-all">
+                View Portfolio
+              </button>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="relative"
+          >
+            <div className="absolute -inset-4 bg-brand/10 rounded-full blur-3xl opacity-30"></div>
+            <div className="relative bg-white border border-slate-200 rounded-2xl shadow-2xl p-8 aspect-square flex flex-col justify-center">
+              <div className="grid grid-cols-2 gap-4">
+                {/* Standard Tech Stack */}
+                <FeatureCard
+                  icon={<Zap />}
+                  title="Fast"
+                  desc="Optimized speed"
+                />
+                <FeatureCard
+                  icon={<Shield />}
+                  title="Secure"
+                  desc="Bank-grade logic"
+                />
+                <FeatureCard
+                  icon={<Code />}
+                  title="Modern"
+                  desc="Next.js & React"
+                />
+                <FeatureCard
+                  icon={<Globe />}
+                  title="Global"
+                  desc="CDN deployed"
+                />
+
+                {/* Specialized Expertise (New) */}
+                <FeatureCard
+                  icon={<Landmark />}
+                  title="Fintech"
+                  desc="Banking heritage"
+                />
+                <FeatureCard
+                  icon={<Blocks />}
+                  title="Blockchain"
+                  desc="Web3 & Smart Contracts"
+                />
+                <FeatureCard
+                  icon={<FileCheck />}
+                  title="Compliant"
+                  desc="Regulator friendly"
+                />
+                <FeatureCard
+                  icon={<Rocket />}
+                  title="Scalable"
+                  desc="MVP to Enterprise"
+                />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-24 bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Our Core Services
+            </h2>
+            <p className="text-slate-400 max-w-2xl">
+              Everything you need to go from concept to launch.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <ServiceCard
+              title="Web Development"
+              desc="High-performance websites built with well-known lastest technology for maximum speed and SEO."
+            />
+            <ServiceCard
+              title="Mobile Apps"
+              desc="Native-feel mobile applications that work seamlessly across iOS and Android."
+            />
+            <ServiceCard
+              title="Cloud Infrastructure"
+              desc="Scalable Cloud architecture designed to handle thousands of users securely."
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+// Simple helper components to keep the code clean
+function FeatureCard({
+  icon,
+  title,
+  desc,
+}: {
+  icon: any;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+      <div className="text-brand mb-2">{icon}</div>
+      <div className="font-bold text-slate-900">{title}</div>
+      <div className="text-xs text-slate-500">{desc}</div>
+    </div>
+  );
+}
+
+function ServiceCard({ title, desc }: { title: string; desc: string }) {
+  return (
+    <div className="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-brand/50 transition-all cursor-default">
+      <div className="h-12 w-12 bg-brand/20 rounded-lg flex items-center justify-center text-brand mb-6 group-hover:scale-110 transition-transform">
+        <CheckCircle className="w-6 h-6" />
+      </div>
+      <h3 className="text-xl font-bold mb-3">{title}</h3>
+      <p className="text-slate-400 leading-relaxed">{desc}</p>
     </div>
   );
 }
