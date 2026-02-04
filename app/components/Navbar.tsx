@@ -34,10 +34,12 @@ export default function Navbar() {
           <Link href="/" className="hover:text-brand transition-colors">
             Home
           </Link>
+          <Link href="/about" className="hover:text-brand transition-colors">
+            About
+          </Link>{" "}
           <Link href="/projects" className="hover:text-brand transition-colors">
-            Portfolio
+            Our Work
           </Link>
-
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
@@ -89,13 +91,20 @@ export default function Navbar() {
             Home
           </Link>
           <Link
+            href="/about"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-lg font-medium hover:text-brand py-2 border-b border-dashed border-gray-700/20"
+          >
+            About
+          </Link>{" "}
+          
+          <Link
             href="/projects"
             onClick={() => setIsMobileMenuOpen(false)}
             className="text-lg font-medium hover:text-brand py-2 border-b border-dashed border-gray-700/20"
           >
             Our Work
           </Link>
-
           {/* Mobile Contact Button */}
           <button className="w-full mt-2 px-5 py-3 bg-brand text-white rounded-lg font-bold hover:bg-teal-700 transition-colors">
             Contact Us

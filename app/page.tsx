@@ -17,7 +17,8 @@ import {
   Landmark,
   Blocks,
   FileCheck,
-  Rocket,
+  // NEW IMPORT
+  BrainCircuit,
   Moon,
   Sun,
 } from "lucide-react";
@@ -177,11 +178,12 @@ export default function Home() {
                   title="Compliant"
                   desc="Regulator friendly"
                 />
+                {/* REPLACED "Scalable" WITH "AI & ML" */}
                 <FeatureCard
                   isDark={isDark}
-                  icon={<Rocket />}
-                  title="Scalable"
-                  desc="MVP to Enterprise"
+                  icon={<BrainCircuit />}
+                  title="AI & ML"
+                  desc="Intelligent Models"
                 />
               </div>
             </div>
@@ -204,7 +206,8 @@ export default function Home() {
               Everything you need to go from concept to launch.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* UPDATED TO 2 COLUMNS TO FIT 4 SERVICES PERFECTLY */}
+          <div className="grid md:grid-cols-2 gap-8">
             <ServiceCard
               isDark={isDark}
               title="Web Development"
@@ -219,6 +222,12 @@ export default function Home() {
               isDark={isDark}
               title="Cloud Infrastructure"
               desc="Scalable Cloud architecture designed to handle thousands of users securely."
+            />
+            {/* NEW AI SERVICE CARD */}
+            <ServiceCard
+              isDark={isDark}
+              title="AI & Machine Learning"
+              desc="Proprietary models, data labeling pipelines, and intelligent automation agents."
             />
           </div>
         </div>

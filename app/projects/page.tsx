@@ -9,22 +9,22 @@ import {
   Palette,
   ShieldCheck,
   Fingerprint,
-  Moon,
-  Sun,
   Layers,
   Database,
-  Menu,
-  X,
+  // NEW ICONS FOR AI SECTION
+  BrainCircuit,
+  Scan,
+  Utensils,
+  Hospital,
+  TrendingUp,
 } from "lucide-react";
+
 // 1. IMPORT THE GLOBAL THEME
 import { useTheme } from "../ThemeContext";
 
 export default function Projects() {
-  // 2. USE THE GLOBAL THEME (Replaces the old useState for isDark)
-  const { isDark, toggleTheme } = useTheme();
-
-  // We still keep useState for the mobile menu because that's local to this page only
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // 2. USE THE GLOBAL THEME
+  const { isDark } = useTheme();
 
   return (
     <div
@@ -43,10 +43,12 @@ export default function Projects() {
               Selected <span className="text-brand">Work</span>
             </h1>
             <p
-              className={`text-lg max-w-2xl ${isDark ? "text-slate-400" : "text-slate-600"}`}
+              className={`text-lg max-w-2xl ${
+                isDark ? "text-slate-400" : "text-slate-600"
+              }`}
             >
-              From National Layer-1 infrastructures to bank-grade compliance
-              tools. Here is how we solve complex engineering challenges.
+              From National Layer-1 infrastructures to proprietary AI models.
+              Here is how we solve complex engineering challenges.
             </p>
           </motion.div>
         </div>
@@ -101,7 +103,7 @@ export default function Projects() {
       </section>
 
       {/* CATEGORY B: REGTECH */}
-      <section className="py-12 px-6 pb-24">
+      <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-3 mb-8">
             <div className="p-3 rounded-lg bg-emerald-500/10 text-emerald-500">
@@ -141,9 +143,62 @@ export default function Projects() {
         </div>
       </section>
 
+      {/* CATEGORY C: AI & MACHINE LEARNING (NEW) */}
+      <section className="py-12 px-6 pb-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center gap-3 mb-8">
+            {/* Using a Purple/Rose theme for AI */}
+            <div className="p-3 rounded-lg bg-purple-500/10 text-purple-500">
+              <BrainCircuit className="w-6 h-6" />
+            </div>
+            <h2 className="text-2xl font-bold">Artificial Intelligence & ML</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ProjectCard
+              isDark={isDark}
+              icon={<Scan />}
+              title="AI Data Labeling Pipeline"
+              desc="High-precision annotation platform utilizing AI pre-labeling to accelerate human workflow."
+              tags={["Computer Vision", "Human-in-the-Loop", "SaaS"]}
+              details={[
+                "Reduces manual effort by 60% via pre-labeling.",
+                "Rapid dataset generation for model training.",
+              ]}
+            />
+            <ProjectCard
+              isDark={isDark}
+              icon={<Hospital />}
+              title="AI-Powered Elderly Care"
+              desc="Created an AI-powered marketplace for elderly care services, enabling users to browse and book caretakers with confidence."
+              tags={["AI Matching", "Care Optimization", "Automation"]}
+              details={[
+                "Analyzes booking patterns to predict inventory.",
+                "Dynamic pricing adjustments based on demand.",
+              ]}
+            />
+            <ProjectCard
+              isDark={isDark}
+              icon={<TrendingUp />}
+              title="Financial Pattern Recognition"
+              desc="Algorithmic models for the financial sector to detect transaction anomalies and fraud."
+              tags={["Fintech", "Anomaly Detection", "Big Data"]}
+              details={[
+                "Processes high-volume data streams in real-time.",
+                "Automated risk scoring and fraud alerts.",
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* CTA Footer */}
       <section
-        className={`py-20 text-center border-t ${isDark ? "bg-slate-900 border-slate-800" : "bg-slate-100 border-slate-200"}`}
+        className={`py-20 text-center border-t ${
+          isDark
+            ? "bg-slate-900 border-slate-800"
+            : "bg-slate-100 border-slate-200"
+        }`}
       >
         <h2 className="text-3xl font-bold mb-6">
           Ready to build something complex?
@@ -178,19 +233,25 @@ function ProjectCard({ icon, title, desc, tags, details, isDark }: any) {
       </div>
 
       <h3
-        className={`text-xl font-bold mb-3 ${isDark ? "text-slate-100" : "text-slate-900"}`}
+        className={`text-xl font-bold mb-3 ${
+          isDark ? "text-slate-100" : "text-slate-900"
+        }`}
       >
         {title}
       </h3>
       <p
-        className={`text-sm mb-6 flex-grow ${isDark ? "text-slate-400" : "text-slate-600"}`}
+        className={`text-sm mb-6 flex-grow ${
+          isDark ? "text-slate-400" : "text-slate-600"
+        }`}
       >
         {desc}
       </p>
 
       {/* Bullet Points */}
       <ul
-        className={`text-sm mb-6 space-y-2 ${isDark ? "text-slate-500" : "text-slate-500"}`}
+        className={`text-sm mb-6 space-y-2 ${
+          isDark ? "text-slate-500" : "text-slate-500"
+        }`}
       >
         {details.map((item: string, i: number) => (
           <li key={i} className="flex gap-2">
