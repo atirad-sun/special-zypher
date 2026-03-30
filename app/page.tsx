@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useTheme } from "./ThemeContext";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -22,221 +21,288 @@ import {
 import { useForm, ValidationError } from "@formspree/react";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
-  }),
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const stagger = {
+  visible: { transition: { staggerChildren: 0.1 } },
 };
 
 export default function Home() {
-  const { isDark } = useTheme();
   const [state, handleSubmit] = useForm("xpqaavvv");
 
   if (state.succeeded) {
     return (
-      <div
-        className={`min-h-screen flex items-center justify-center transition-colors duration-300
-        ${isDark ? "bg-surface-dark text-slate-100" : "bg-slate-50 text-slate-900"}`}
-      >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className={`text-center p-12 rounded-2xl border backdrop-blur-sm
-          ${isDark ? "bg-surface-dark-card border-white/[0.06]" : "bg-white border-slate-200 shadow-xl"}`}
-        >
-          <div className="w-16 h-16 bg-emerald-500/15 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto mb-5">
+      <div className="min-h-screen flex items-center justify-center bg-paper">
+        <div className="text-center p-12 border border-border rounded-sm">
+          <div className="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-5">
             <CheckCircle className="w-8 h-8" />
           </div>
-          <h2 className="text-3xl font-[family-name:var(--font-heading)] font-bold mb-2">
+          <h2 className="text-3xl font-[family-name:var(--font-heading)] font-bold text-ink mb-2">
             Message Sent!
           </h2>
-          <p className={`mb-8 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+          <p className="mb-8 text-ink-muted">
             Thanks for reaching out. We&apos;ll get back to you shortly.
           </p>
           <button
             onClick={() => window.location.reload()}
-            className="px-6 py-2.5 bg-brand text-white rounded-lg font-semibold hover:bg-brand-light transition-all cursor-pointer"
+            className="px-6 py-2.5 bg-cta text-white rounded font-medium hover:bg-cta-hover transition-all cursor-pointer"
           >
             Back to Home
           </button>
-        </motion.div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div
-      className={`min-h-screen transition-colors duration-300
-      ${isDark ? "bg-surface-dark text-slate-100" : "bg-slate-50 text-slate-900"}`}
-    >
+    <div className="min-h-screen bg-paper text-ink">
       {/* ═══════════════ HERO ═══════════════ */}
-      <section className="relative pt-32 pb-24 px-6 overflow-hidden grain">
-        {/* Ambient background glows */}
-        <div
-          className={`absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none
-          ${isDark ? "bg-brand/[0.07]" : "bg-brand/[0.04]"}`}
-        />
-        <div
-          className={`absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full blur-[100px] pointer-events-none
-          ${isDark ? "bg-accent/[0.04]" : "bg-accent/[0.03]"}`}
-        />
+      <section className="pt-28 pb-8 px-6">
+        {/* Announcement bar */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-8"
+        >
+          <span className="inline-flex items-center gap-2 text-sm">
+            <span className="px-2 py-0.5 bg-red-600 text-white text-xs font-bold rounded-sm">
+              Now available
+            </span>
+            <span className="text-ink-muted">
+              Enterprise AI Solutions for 2026.{" "}
+              <a href="/projects" className="underline hover:text-ink transition-colors">
+                Learn more
+              </a>{" "}
+              <ArrowRight className="inline w-3 h-3" />
+            </span>
+          </span>
+        </motion.div>
 
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-          >
-            <motion.div variants={fadeUp} custom={0}>
-              <div
-                className={`inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-medium mb-8 border
-                ${
-                  isDark
-                    ? "bg-brand/[0.08] text-brand-light border-brand/20"
-                    : "bg-brand/[0.06] text-brand border-brand/15"
-                }`}
-              >
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand"></span>
-                </span>
-                Accepting New Projects for 2026
-              </div>
-            </motion.div>
-
-            <motion.h1
-              variants={fadeUp}
-              custom={1}
-              className="text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-heading)] font-bold tracking-tight leading-[1.08] mb-6"
-            >
-              Building digital{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-light">
-                experiences
-              </span>{" "}
-              that matter.
-            </motion.h1>
-
-            <motion.p
-              variants={fadeUp}
-              custom={2}
-              className={`text-lg mb-10 max-w-lg leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}
-            >
-              We help forward-thinking companies launch fast, scalable, and
-              secure digital products using cutting-edge technology.
-            </motion.p>
-
-            <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4">
-              <a
-                href="#contact"
-                className="group px-8 py-4 bg-brand text-white rounded-lg font-semibold hover:bg-brand-light transition-all duration-200 flex items-center gap-2.5 shadow-lg shadow-brand/20 hover:shadow-xl hover:shadow-brand/30 cursor-pointer"
-              >
-                Start Your Project
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-              <a
-                href="/projects"
-                className={`px-8 py-4 border rounded-lg font-semibold transition-all duration-200 flex items-center justify-center
-                ${
-                  isDark
-                    ? "border-white/[0.1] text-slate-300 hover:bg-white/[0.04] hover:border-white/[0.15]"
-                    : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:border-slate-300"
-                }`}
-              >
-                View Our Work
-              </a>
-            </motion.div>
-          </motion.div>
-
-          {/* Hero Bento Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="relative"
+            transition={{ duration: 0.6 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-heading)] font-bold leading-[1.1] mb-6 text-ink"
           >
-            <div
-              className={`absolute -inset-6 rounded-3xl blur-[60px] pointer-events-none
-              ${isDark ? "bg-brand/[0.06]" : "bg-brand/[0.04]"}`}
-            />
-            <div
-              className={`relative border rounded-2xl p-6 backdrop-blur-sm glow-brand
-              ${isDark ? "bg-surface-dark-card/80 border-white/[0.06]" : "bg-white/80 border-slate-200/80 shadow-xl"}`}
+            Put digital innovation
+            <br />
+            to work for your business
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.5 }}
+            className="text-lg text-ink-muted max-w-2xl mx-auto mb-10 leading-relaxed"
+          >
+            Orchestrate intelligent solutions to run end-to-end digital workflows —
+            delivering speed, security, and measurable impact.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.5 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            <a
+              href="/#contact"
+              className="px-6 py-3 border border-ink text-ink font-medium rounded hover:bg-ink hover:text-white transition-all cursor-pointer"
             >
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { icon: <Zap />, title: "Fast", desc: "Optimized speed", delay: 0 },
-                  { icon: <Shield />, title: "Secure", desc: "Bank-grade logic", delay: 1 },
-                  { icon: <Code />, title: "Modern", desc: "Next.js & React", delay: 2 },
-                  { icon: <Globe />, title: "Global", desc: "CDN deployed", delay: 3 },
-                  { icon: <Landmark />, title: "Fintech", desc: "Banking heritage", delay: 4 },
-                  { icon: <Blocks />, title: "Blockchain", desc: "Web3 & Smart Contracts", delay: 5 },
-                  { icon: <FileCheck />, title: "Compliant", desc: "Regulator friendly", delay: 6 },
-                  { icon: <BrainCircuit />, title: "AI & ML", desc: "Intelligent Models", delay: 7 },
-                ].map((item) => (
-                  <motion.div
-                    key={item.title}
-                    initial="hidden"
-                    animate="visible"
-                    custom={item.delay}
-                    variants={fadeUp}
-                  >
-                    <FeatureCard isDark={isDark} icon={item.icon} title={item.title} desc={item.desc} />
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+              Start Your Project
+            </a>
+            <a
+              href="/#contact"
+              className="px-6 py-3 bg-cta text-white font-medium rounded hover:bg-cta-hover transition-all cursor-pointer"
+            >
+              Get A Demo
+            </a>
           </motion.div>
         </div>
       </section>
 
-      {/* ═══════════════ SERVICES ═══════════════ */}
-      <section className={`py-28 transition-colors relative ${isDark ? "bg-surface-dark-card" : "bg-white"}`}>
-        <div className="max-w-7xl mx-auto px-6">
+      {/* Hero grid-pattern illustration area */}
+      <section className="px-6 pb-12">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="max-w-5xl mx-auto"
+        >
+          <div className="relative rounded-sm overflow-hidden bg-paper-warm grid-pattern-blue py-20 px-8 flex items-center justify-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-3xl">
+              {[
+                { icon: <Zap />, title: "Fast", desc: "Optimized speed" },
+                { icon: <Shield />, title: "Secure", desc: "Bank-grade logic" },
+                { icon: <Code />, title: "Modern", desc: "Next.js & React" },
+                { icon: <Globe />, title: "Global", desc: "CDN deployed" },
+                { icon: <Landmark />, title: "Fintech", desc: "Banking heritage" },
+                { icon: <Blocks />, title: "Blockchain", desc: "Web3 & Smart Contracts" },
+                { icon: <FileCheck />, title: "Compliant", desc: "Regulator friendly" },
+                { icon: <BrainCircuit />, title: "AI & ML", desc: "Intelligent Models" },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="bg-white border border-border p-4 rounded-sm text-center hover:shadow-md transition-shadow"
+                >
+                  <div className="text-brand mx-auto mb-2 flex justify-center">
+                    {React.cloneElement(item.icon, { className: "w-5 h-5" })}
+                  </div>
+                  <div className="font-semibold text-sm text-ink">{item.title}</div>
+                  <div className="text-xs text-ink-muted mt-0.5">{item.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* ═══════════════ TRUST BAR ═══════════════ */}
+      <section className="py-12 px-6 border-t border-border">
+        <div className="max-w-5xl mx-auto text-center">
+          <p className="text-sm font-semibold text-ink-muted mb-6 tracking-wide">
+            Trusted by enterprise teams across Southeast Asia
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-16 gap-y-6">
+            {["FinTech Leaders", "GovTech Partners", "Web3 Innovators", "Enterprise Clients"].map(
+              (name) => (
+                <span key={name} className="text-ink-muted/50 font-bold text-lg tracking-tight">
+                  {name}
+                </span>
+              )
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ PLATFORM SECTION ═══════════════ */}
+      <section className="py-24 px-6 border-t border-border">
+        <div className="max-w-4xl mx-auto text-center mb-16">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+            variants={stagger}
           >
-            <motion.div variants={fadeUp} custom={0} className="mb-16">
-              <p className="text-brand text-sm font-semibold tracking-widest uppercase mb-3">
-                What We Do
-              </p>
-              <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] font-bold mb-4">
-                Our Core Services
-              </h2>
-              <p className={`${isDark ? "text-slate-400" : "text-slate-600"} max-w-2xl`}>
-                Everything you need to go from concept to launch.
-              </p>
+            <motion.p variants={fadeUp} className="text-sm font-semibold text-ink-muted tracking-widest uppercase mb-4">
+              The ONE EIGHT X Platform
+            </motion.p>
+            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-[family-name:var(--font-heading)] font-bold text-ink italic leading-tight">
+              The execution platform for
+              <br />intelligent digital solutions
+            </motion.h2>
+            <motion.p variants={fadeUp} className="mt-6 text-ink-muted max-w-2xl mx-auto leading-relaxed">
+              ONE EIGHT X is the engineering partner built for modern enterprises.
+              With specialized expertise in FinTech, Blockchain, and AI — we transform
+              strategy into execution, reducing operational complexity and driving measurable growth.
+            </motion.p>
+            <motion.div variants={fadeUp} className="mt-8">
+              <a
+                href="/projects"
+                className="inline-flex items-center gap-1 px-6 py-3 border border-ink text-ink font-medium rounded hover:bg-ink hover:text-white transition-all cursor-pointer"
+              >
+                Explore The Platform
+              </a>
             </motion.div>
+          </motion.div>
+        </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+        {/* 3 Service cards — Jasper style (colored bg, illustrations) */}
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+            className="grid md:grid-cols-3 gap-6"
+          >
+            {[
+              {
+                title: "Web Development",
+                desc: "High-performance websites built with the latest technology for maximum speed and SEO.",
+                icon: <Code className="w-8 h-8" />,
+                bgClass: "bg-emerald-50 grid-pattern-green",
+                cta: "Learn more",
+              },
+              {
+                title: "AI & Machine Learning",
+                desc: "Proprietary models, data labeling pipelines, and intelligent automation agents.",
+                icon: <BrainCircuit className="w-8 h-8" />,
+                bgClass: "bg-orange-50 grid-pattern",
+                cta: "Learn more",
+              },
+              {
+                title: "Cloud & Blockchain",
+                desc: "Scalable cloud architecture and Web3 solutions designed for enterprise.",
+                icon: <Blocks className="w-8 h-8" />,
+                bgClass: "bg-blue-50 grid-pattern-blue",
+                cta: "Learn more",
+              },
+            ].map((service, i) => (
+              <motion.div
+                key={service.title}
+                variants={fadeUp}
+                className="border border-border rounded-sm overflow-hidden group"
+              >
+                <div className={`${service.bgClass} p-8 flex items-center justify-center h-48`}>
+                  <div className="text-ink/60 group-hover:scale-110 transition-transform duration-300">
+                    {service.icon}
+                  </div>
+                </div>
+                <div className="p-6 bg-white">
+                  <h3 className="text-xl font-bold text-ink mb-2">{service.title}</h3>
+                  <p className="text-sm text-ink-muted leading-relaxed mb-4">{service.desc}</p>
+                  <a href="/projects" className="inline-flex items-center gap-1 text-sm font-medium text-ink hover:text-brand transition-colors">
+                    {service.cta} <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══════════════ WHY SECTION ═══════════════ */}
+      <section className="py-24 px-6 border-t border-border">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={stagger}
+          >
+            <div className="max-w-xl mb-16">
+              <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-[family-name:var(--font-heading)] font-bold text-ink italic leading-tight mb-6">
+                Why modern teams choose ONE EIGHT X
+              </motion.h2>
+              <motion.p variants={fadeUp} className="text-ink-muted leading-relaxed">
+                Give your team the tools to move faster, stay on-brand, and scale
+                digital products across every channel and market.
+              </motion.p>
+            </div>
+
+            {/* Accordion-style feature list */}
+            <div className="space-y-0">
               {[
-                {
-                  title: "Web Development",
-                  desc: "High-performance websites built with well-known latest technology for maximum speed and SEO.",
-                  icon: <Code className="w-6 h-6" />,
-                },
-                {
-                  title: "Mobile Apps",
-                  desc: "Native-feel mobile applications that work seamlessly across iOS and Android.",
-                  icon: <Zap className="w-6 h-6" />,
-                },
-                {
-                  title: "Cloud Infrastructure",
-                  desc: "Scalable Cloud architecture designed to handle thousands of users securely.",
-                  icon: <Globe className="w-6 h-6" />,
-                },
-                {
-                  title: "AI & Machine Learning",
-                  desc: "Proprietary models, data labeling pipelines, and intelligent automation agents.",
-                  icon: <BrainCircuit className="w-6 h-6" />,
-                },
-              ].map((service, i) => (
-                <motion.div key={service.title} variants={fadeUp} custom={i + 1}>
-                  <ServiceCard isDark={isDark} title={service.title} desc={service.desc} icon={service.icon} />
+                { title: "Enterprise-grade security from day one", highlight: true },
+                { title: "Scale campaigns and performance" },
+                { title: "Keep your brand voice consistent, everywhere" },
+                { title: "Empower every developer with automation" },
+                { title: "Built for scale, backed by experts" },
+              ].map((item) => (
+                <motion.div
+                  key={item.title}
+                  variants={fadeUp}
+                  className={`py-5 border-b border-border ${item.highlight ? "font-semibold text-ink" : "text-ink-muted"}`}
+                >
+                  <h3 className={`text-lg ${item.highlight ? "text-ink" : ""}`}>{item.title}</h3>
+                  {item.highlight && (
+                    <p className="mt-2 text-sm text-ink-muted font-normal leading-relaxed max-w-2xl">
+                      With decades in banking, government, and blockchain — our architecture
+                      prioritizes data protection & compliance while providing superior outputs.
+                    </p>
+                  )}
                 </motion.div>
               ))}
             </div>
@@ -244,31 +310,99 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ═══════════════ STATS + TESTIMONIAL ═══════════════ */}
+      <section className="py-16 px-6 border-t border-border">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="grid md:grid-cols-3 gap-0"
+          >
+            {[
+              { stat: "50+", label: "Projects delivered", first: true },
+              { stat: "10+", label: "Years combined experience", first: false },
+              { stat: "99%", label: "Client satisfaction", first: false },
+            ].map((item) => (
+              <motion.div
+                key={item.label}
+                variants={fadeUp}
+                className={`p-8 text-center border border-border ${!item.first ? "md:border-l-0" : ""}`}
+              >
+                <div className="text-4xl font-[family-name:var(--font-heading)] font-bold text-ink mb-1">
+                  {item.stat}
+                </div>
+                <div className="text-sm text-ink-muted">{item.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══════════════ TRUST / SECURITY ═══════════════ */}
+      <section className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="relative rounded-sm overflow-hidden grid-pattern p-16 md:p-24 text-center">
+            {/* Decorative border blocks — Jasper style */}
+            <div className="absolute top-0 left-0 w-24 h-24 border-r border-b border-brand/20" />
+            <div className="absolute top-0 right-0 w-24 h-24 border-l border-b border-brand/20" />
+            <div className="absolute bottom-0 left-0 w-24 h-24 border-r border-t border-brand/20" />
+            <div className="absolute bottom-0 right-0 w-24 h-24 border-l border-t border-brand/20" />
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={stagger}
+            >
+              <motion.p variants={fadeUp} className="text-sm font-semibold text-ink-muted tracking-widest uppercase mb-4">
+                Trust. Foundation
+              </motion.p>
+              <motion.h2
+                variants={fadeUp}
+                className="text-4xl md:text-5xl font-[family-name:var(--font-heading)] font-bold text-ink italic leading-tight mb-6"
+              >
+                Enterprise-grade security,
+                <br />
+                quality outputs
+              </motion.h2>
+              <motion.p variants={fadeUp} className="text-ink-muted max-w-xl mx-auto mb-8 leading-relaxed">
+                Enterprise-grade security and battle-tested architecture
+                prioritize your data protection & privacy while providing
+                superior digital outputs.
+              </motion.p>
+              <motion.div variants={fadeUp}>
+                <a
+                  href="/about"
+                  className="inline-flex items-center gap-1 px-6 py-3 border border-ink text-ink font-medium rounded hover:bg-ink hover:text-white transition-all cursor-pointer"
+                >
+                  Explore Trust
+                </a>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══════════════ CONTACT ═══════════════ */}
-      <section
-        id="contact"
-        className={`py-28 transition-colors relative ${isDark ? "bg-surface-dark" : "bg-slate-50"}`}
-      >
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="contact" className="py-24 px-6 border-t border-border">
+        <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16">
-            {/* Left: Contact Info */}
+            {/* Left */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+              variants={stagger}
             >
-              <motion.p variants={fadeUp} custom={0} className="text-brand text-sm font-semibold tracking-widest uppercase mb-3">
+              <motion.p variants={fadeUp} className="text-sm font-semibold text-ink-muted tracking-widest uppercase mb-4">
                 Get in Touch
               </motion.p>
-              <motion.h2 variants={fadeUp} custom={1} className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] font-bold mb-6">
+              <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-[family-name:var(--font-heading)] font-bold text-ink italic mb-6">
                 Let&apos;s work together.
               </motion.h2>
-              <motion.p
-                variants={fadeUp}
-                custom={2}
-                className={`mb-10 text-lg leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}
-              >
+              <motion.p variants={fadeUp} className="mb-10 text-lg text-ink-muted leading-relaxed">
                 Ready to start your next project? Fill out the form or reach out
                 to us directly.
               </motion.p>
@@ -279,9 +413,9 @@ export default function Home() {
                   { icon: <Phone />, label: "Phone", value: "+66 87-406-5389", href: "tel:+66874065389" },
                   { icon: <Phone />, label: "Phone", value: "+66 80-221-8181", href: "tel:+66802218181" },
                   { icon: <MapPin />, label: "Office", value: "Bangkok, Thailand" },
-                ].map((item, i) => (
-                  <motion.div key={`${item.label}-${item.value}`} variants={fadeUp} custom={i + 3}>
-                    <ContactItem isDark={isDark} icon={item.icon} label={item.label} value={item.value} href={item.href} />
+                ].map((item) => (
+                  <motion.div key={`${item.label}-${item.value}`} variants={fadeUp}>
+                    <ContactItem icon={item.icon} label={item.label} value={item.value} href={item.href} />
                   </motion.div>
                 ))}
               </div>
@@ -290,71 +424,50 @@ export default function Home() {
             {/* Right: Form */}
             <motion.form
               onSubmit={handleSubmit}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5 }}
-              className={`p-8 md:p-10 rounded-2xl border backdrop-blur-sm transition-colors duration-300
-              ${
-                isDark
-                  ? "bg-surface-dark-card border-white/[0.06]"
-                  : "bg-white border-slate-200 shadow-xl shadow-slate-200/40"
-              }`}
+              className="p-8 md:p-10 border border-border rounded-sm bg-white"
             >
               <div className="space-y-6">
                 <div className="grid grid-cols-2 gap-4">
-                  <InputGroup isDark={isDark} id="firstName" label="First Name" placeholder="John" />
-                  <InputGroup isDark={isDark} id="lastName" label="Last Name" placeholder="Doe" />
+                  <InputGroup id="firstName" label="First Name" placeholder="John" />
+                  <InputGroup id="lastName" label="Last Name" placeholder="Doe" />
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="email"
-                    className={`block text-sm font-medium mb-2 ${isDark ? "text-slate-300" : "text-slate-700"}`}
-                  >
+                  <label htmlFor="email" className="block text-sm font-medium mb-2 text-ink">
                     Email Address
                   </label>
                   <input
                     id="email"
                     name="email"
                     type="email"
-                    className={`w-full px-4 py-3 rounded-lg border outline-none transition-all duration-200 focus:border-brand focus:ring-2 focus:ring-brand/20
-                    ${
-                      isDark
-                        ? "bg-surface-dark border-white/[0.08] text-white placeholder-slate-600"
-                        : "bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400"
-                    }`}
+                    className="w-full px-4 py-3 border border-border rounded-sm outline-none transition-all focus:border-brand focus:ring-2 focus:ring-brand/10 text-ink bg-white placeholder-ink-muted/50"
                     placeholder="john@example.com"
                   />
-                  <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-400 text-sm mt-1.5" />
+                  <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-sm mt-1.5" />
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="message"
-                    className={`block text-sm font-medium mb-2 ${isDark ? "text-slate-300" : "text-slate-700"}`}
-                  >
+                  <label htmlFor="message" className="block text-sm font-medium mb-2 text-ink">
                     Message
                   </label>
                   <textarea
                     id="message"
                     name="message"
                     rows={4}
-                    className={`w-full px-4 py-3 rounded-lg border outline-none transition-all duration-200 focus:border-brand focus:ring-2 focus:ring-brand/20 resize-none
-                    ${
-                      isDark
-                        ? "bg-surface-dark border-white/[0.08] text-white placeholder-slate-600"
-                        : "bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400"
-                    }`}
+                    className="w-full px-4 py-3 border border-border rounded-sm outline-none transition-all focus:border-brand focus:ring-2 focus:ring-brand/10 resize-none text-ink bg-white placeholder-ink-muted/50"
                     placeholder="Tell us about your project..."
                   />
-                  <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-400 text-sm mt-1.5" />
+                  <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-500 text-sm mt-1.5" />
                 </div>
 
                 <button
                   type="submit"
                   disabled={state.submitting}
-                  className="w-full py-4 bg-brand text-white font-semibold rounded-lg hover:bg-brand-light transition-all duration-200 flex items-center justify-center gap-2.5 disabled:opacity-50 shadow-lg shadow-brand/20 hover:shadow-xl hover:shadow-brand/30 cursor-pointer"
+                  className="w-full py-4 bg-cta text-white font-semibold rounded-sm hover:bg-cta-hover transition-all flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer"
                 >
                   {state.submitting ? "Sending..." : "Send Message"}
                   {!state.submitting && <Send className="w-4 h-4" />}
@@ -370,97 +483,32 @@ export default function Home() {
 
 // ── HELPER COMPONENTS ──
 
-function FeatureCard({ icon, title, desc, isDark }: any) {
-  return (
-    <div
-      className={`group p-4 rounded-xl border transition-all duration-200 gradient-border
-      ${
-        isDark
-          ? "bg-surface-dark-elevated/50 border-white/[0.06] hover:bg-surface-dark-elevated"
-          : "bg-slate-50/80 border-slate-100 hover:bg-white hover:shadow-md"
-      }`}
-    >
-      <div className="text-brand mb-2.5 transition-transform duration-200 group-hover:scale-110">
-        {React.cloneElement(icon, { className: "w-5 h-5" })}
-      </div>
-      <div className={`font-semibold text-sm ${isDark ? "text-slate-200" : "text-slate-900"}`}>
-        {title}
-      </div>
-      <div className={`text-xs mt-0.5 ${isDark ? "text-slate-500" : "text-slate-500"}`}>
-        {desc}
-      </div>
-    </div>
-  );
-}
-
-function ServiceCard({ title, desc, icon, isDark }: any) {
-  return (
-    <div
-      className={`group p-8 rounded-2xl border transition-all duration-300 gradient-border cursor-default
-      ${
-        isDark
-          ? "bg-surface-dark-elevated/40 border-white/[0.06] hover:bg-surface-dark-elevated/70"
-          : "bg-slate-50/50 border-slate-200 hover:bg-white hover:shadow-lg"
-      }`}
-    >
-      <div
-        className={`h-12 w-12 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-105
-        ${isDark ? "bg-brand/10 text-brand-light" : "bg-brand/10 text-brand"}`}
-      >
-        {icon}
-      </div>
-      <h3 className={`text-xl font-[family-name:var(--font-heading)] font-bold mb-3 ${isDark ? "text-slate-100" : "text-slate-900"}`}>
-        {title}
-      </h3>
-      <p className={`leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-        {desc}
-      </p>
-    </div>
-  );
-}
-
-function ContactItem({ icon, label, value, href, isDark }: any) {
+function ContactItem({ icon, label, value, href }: any) {
   const content = (
     <div className="flex items-center gap-4 group">
-      <div
-        className={`w-11 h-11 rounded-xl flex items-center justify-center text-brand transition-all duration-200 group-hover:scale-105
-        ${isDark ? "bg-brand/[0.08] border border-brand/15" : "bg-brand/[0.06] border border-brand/10"}`}
-      >
-        {React.cloneElement(icon, { className: "w-[18px] h-[18px]" })}
+      <div className="w-10 h-10 border border-border rounded-sm flex items-center justify-center text-brand group-hover:bg-brand/5 transition-colors">
+        {React.cloneElement(icon, { className: "w-4 h-4" })}
       </div>
       <div>
-        <div className={`text-xs font-medium uppercase tracking-wider ${isDark ? "text-slate-500" : "text-slate-400"}`}>
-          {label}
-        </div>
-        <div className={`font-medium transition-colors group-hover:text-brand ${isDark ? "text-slate-200" : "text-slate-900"}`}>
-          {value}
-        </div>
+        <div className="text-xs font-medium uppercase tracking-wider text-ink-muted">{label}</div>
+        <div className="font-medium text-ink group-hover:text-brand transition-colors">{value}</div>
       </div>
     </div>
   );
-
   return href ? <a href={href}>{content}</a> : content;
 }
 
-function InputGroup({ id, label, placeholder, isDark }: any) {
+function InputGroup({ id, label, placeholder }: any) {
   return (
     <div>
-      <label
-        htmlFor={id}
-        className={`block text-sm font-medium mb-2 ${isDark ? "text-slate-300" : "text-slate-700"}`}
-      >
+      <label htmlFor={id} className="block text-sm font-medium mb-2 text-ink">
         {label}
       </label>
       <input
         id={id}
         name={id}
         type="text"
-        className={`w-full px-4 py-3 rounded-lg border outline-none transition-all duration-200 focus:border-brand focus:ring-2 focus:ring-brand/20
-        ${
-          isDark
-            ? "bg-surface-dark border-white/[0.08] text-white placeholder-slate-600"
-            : "bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400"
-        }`}
+        className="w-full px-4 py-3 border border-border rounded-sm outline-none transition-all focus:border-brand focus:ring-2 focus:ring-brand/10 text-ink bg-white placeholder-ink-muted/50"
         placeholder={placeholder}
       />
     </div>
