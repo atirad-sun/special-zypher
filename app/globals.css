@@ -1,5 +1,106 @@
 @import "tailwindcss";
 
 @theme {
+  /* ── Brand Palette ── */
   --color-brand: #00675b;
+  --color-brand-light: #00897b;
+  --color-brand-dark: #004d40;
+
+  /* ── Accent (warm gold for CTAs & highlights) ── */
+  --color-accent: #d4a853;
+  --color-accent-light: #e2c07c;
+
+  /* ── Surfaces ── */
+  --color-surface-dark: #0a0f1a;
+  --color-surface-dark-card: #111827;
+  --color-surface-dark-elevated: #1a2332;
+
+  /* ── Glass tokens ── */
+  --color-glass-border-light: rgba(0, 103, 91, 0.15);
+  --color-glass-border-dark: rgba(0, 103, 91, 0.25);
+}
+
+/* ── Grain texture overlay (adds depth) ── */
+@layer utilities {
+  .grain {
+    position: relative;
+  }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px;
+  }
+}
+
+/* ── Animated gradient border (used on hover cards) ── */
+@layer utilities {
+  .gradient-border {
+    position: relative;
+    overflow: hidden;
+  }
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      var(--color-brand),
+      var(--color-accent),
+      var(--color-brand-light)
+    );
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .gradient-border:hover::before {
+    opacity: 1;
+  }
+}
+
+/* ── Glow pulse for hero accents ── */
+@layer utilities {
+  .glow-brand {
+    box-shadow:
+      0 0 20px rgba(0, 103, 91, 0.15),
+      0 0 60px rgba(0, 103, 91, 0.08);
+  }
+  .glow-brand-strong {
+    box-shadow:
+      0 0 30px rgba(0, 103, 91, 0.25),
+      0 0 80px rgba(0, 103, 91, 0.12);
+  }
+}
+
+/* ── Smooth scroll ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Selection color ── */
+::selection {
+  background: var(--color-brand);
+  color: white;
+}
+
+/* ── Reduce motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

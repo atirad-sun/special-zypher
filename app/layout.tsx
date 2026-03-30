@@ -1,16 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
-// Adding navbar and footber to every pages
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
-// 1. We add the import for our new Theme Brain here
 import { ThemeProvider } from "./ThemeContext";
 
-const font = Plus_Jakarta_Sans({ subsets: ["latin"] });
+const headingFont = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  weight: ["400", "500", "600", "700"],
+});
+
+const bodyFont = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+  weight: ["300", "400", "500", "600", "700"],
+});
 
 export const viewport: Viewport = {
   themeColor: "#00675b",
@@ -75,7 +82,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${font.className} flex flex-col min-h-screen`}>
+      <body className={`${headingFont.variable} ${bodyFont.variable} font-[family-name:var(--font-body)] flex flex-col min-h-screen`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
