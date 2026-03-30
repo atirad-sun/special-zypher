@@ -107,16 +107,16 @@ export default function Home() {
             className="flex flex-wrap justify-center gap-4"
           >
             <a
-              href="/#contact"
+              href="/projects"
               className="px-6 py-3 border border-ink text-ink font-medium rounded hover:bg-ink hover:text-white transition-all cursor-pointer"
             >
-              Start Your Project
+              View Our Work
             </a>
             <a
               href="/#contact"
               className="px-6 py-3 bg-cta text-white font-medium rounded hover:bg-cta-hover transition-all cursor-pointer"
             >
-              Get A Demo
+              Start Your Project
             </a>
           </motion.div>
         </div>

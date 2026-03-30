@@ -182,18 +182,18 @@ export default function Projects() {
                 with ONE EIGHT X
               </h2>
               <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href="/"
+                <Link
+                  href="/about"
                   className="px-6 py-3 border border-ink text-ink font-medium rounded hover:bg-ink hover:text-white transition-all cursor-pointer"
                 >
-                  Start Free Trial
-                </a>
-                <Link
-                  href="/"
+                  Learn About Us
+                </Link>
+                <a
+                  href="/#contact"
                   className="px-6 py-3 bg-cta text-white font-medium rounded hover:bg-cta-hover transition-all cursor-pointer"
                 >
-                  Get A Demo
-                </Link>
+                  Start Your Project
+                </a>
               </div>
             </div>
           </motion.div>

@@ -38,13 +38,13 @@ export default function Navbar() {
               href="/#contact"
               className="px-4 py-2 text-sm font-medium border border-ink text-ink rounded hover:bg-ink hover:text-white transition-all cursor-pointer"
             >
-              Start Free Trial
+              Talk to Us
             </a>
             <a
               href="/#contact"
               className="px-4 py-2 text-sm font-medium bg-cta text-white rounded hover:bg-cta-hover transition-all cursor-pointer"
             >
-              Get A Demo
+              Start Your Project
             </a>
           </div>
         </div>
@@ -82,14 +82,14 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="w-full text-center px-5 py-3 border border-ink text-ink rounded font-medium hover:bg-ink hover:text-white transition-colors cursor-pointer"
             >
-              Start Free Trial
+              Talk to Us
             </a>
             <a
               href="/#contact"
               onClick={() => setIsMobileMenuOpen(false)}
               className="w-full text-center px-5 py-3 bg-cta text-white rounded font-medium hover:bg-cta-hover transition-colors cursor-pointer"
             >
-              Get A Demo
+              Start Your Project
             </a>
           </div>
         </div>

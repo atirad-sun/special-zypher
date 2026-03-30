@@ -85,13 +85,13 @@ export default function Footer() {
                 href="/#contact"
                 className="inline-block text-center px-4 py-2 bg-cta text-white text-sm font-medium rounded hover:bg-cta-hover transition-colors cursor-pointer"
               >
-                Get A Demo
+                Start Your Project
               </a>
               <a
                 href="/#contact"
                 className="inline-block text-center px-4 py-2 border border-footer-text text-footer-text text-sm font-medium rounded hover:border-white hover:text-white transition-colors cursor-pointer"
               >
-                Start Free Trial
+                Talk to Us
               </a>
             </div>
           </div>
