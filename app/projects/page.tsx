@@ -39,7 +39,7 @@ export default function Projects() {
             </motion.p>
             <motion.h1
               variants={fadeUp}
-              className="text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-heading)] font-bold italic leading-tight mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-heading)] font-bold italic leading-[1.05] tracking-[-0.03em] mb-6"
             >
               Selected Work
             </motion.h1>
@@ -176,7 +176,7 @@ export default function Projects() {
           >
             {/* Jasper-style floating card CTA */}
             <div className="inline-block bg-white border border-border rounded-sm px-16 py-12">
-              <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] font-bold italic text-ink mb-8">
+              <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] font-bold italic text-ink tracking-[-0.02em] mb-8">
                 Get started
                 <br />
                 with ONE EIGHT X
@@ -184,13 +184,13 @@ export default function Projects() {
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
                   href="/about"
-                  className="px-6 py-3 border border-ink text-ink font-medium rounded hover:bg-ink hover:text-white transition-all cursor-pointer"
+                  className="btn-spring px-6 py-3 border border-ink text-ink font-medium rounded-full hover:bg-ink hover:text-white cursor-pointer"
                 >
                   Learn About Us
                 </Link>
                 <a
                   href="/#contact"
-                  className="px-6 py-3 bg-cta text-white font-medium rounded hover:bg-cta-hover transition-all cursor-pointer"
+                  className="btn-spring px-6 py-3 bg-cta text-white font-medium rounded-full hover:bg-cta-hover cursor-pointer"
                 >
                   Start Your Project
                 </a>
@@ -222,7 +222,7 @@ function CategorySection({
           variants={stagger}
         >
           <motion.div variants={fadeUp} className="flex items-center gap-3 mb-10">
-            <div className={`p-2.5 rounded-sm ${gridBgClass} border border-border text-ink/60`}>
+            <div className={`p-2.5 rounded-full ${gridBgClass} border border-border text-ink/60`}>
               {icon}
             </div>
             <h2 className="text-2xl font-[family-name:var(--font-heading)] font-bold italic">
@@ -247,7 +247,7 @@ function ProjectCard({ icon, title, desc, tags, details }: any) {
   return (
     <div className="border border-border rounded-sm flex flex-col h-full bg-white hover:shadow-md transition-shadow">
       <div className="p-6 flex-grow">
-        <div className="w-10 h-10 border border-border rounded-sm flex items-center justify-center text-brand mb-5">
+        <div className="w-10 h-10 bg-brand/8 rounded-full flex items-center justify-center text-brand mb-5">
           {React.cloneElement(icon, { className: "w-5 h-5" })}
         </div>
 
@@ -267,7 +267,7 @@ function ProjectCard({ icon, title, desc, tags, details }: any) {
       {/* Tags */}
       <div className="px-6 pb-5 pt-4 border-t border-border flex flex-wrap gap-2">
         {tags.map((tag: string) => (
-          <span key={tag} className="text-xs px-2.5 py-1 border border-border rounded-sm text-ink-muted">
+          <span key={tag} className="text-xs px-3 py-1 bg-ink/5 rounded-full text-ink-muted">
             {tag}
           </span>
         ))}

@@ -28,6 +28,10 @@
   --color-highlight-blue: #3b82f6;
   --color-highlight-pink: #ec4899;
   --color-highlight-yellow: #eab308;
+
+  /* ── Animation tokens (Jasper-style) ── */
+  --ease-spring: cubic-bezier(.175, .885, .32, 1.275);
+  --radius-pill: 100vw;
 }
 
 /* ── Grid pattern background (Jasper signature) ── */
@@ -61,6 +65,36 @@
       linear-gradient(rgba(236, 72, 153, 0.12) 1px, transparent 1px),
       linear-gradient(90deg, rgba(236, 72, 153, 0.12) 1px, transparent 1px);
     background-size: 28px 28px;
+  }
+
+  /* ── Card hover rotation (Jasper nth-child pattern) ── */
+  .card-grid > *:nth-child(1) { --card-rotation: 1.8deg; }
+  .card-grid > *:nth-child(2) { --card-rotation: -3.2deg; }
+  .card-grid > *:nth-child(3) { --card-rotation: 2.9deg; }
+  .card-grid > *:nth-child(4) { --card-rotation: -1.4deg; }
+  .card-grid > *:nth-child(5) { --card-rotation: 3.5deg; }
+  .card-grid > *:nth-child(6) { --card-rotation: -2.5deg; }
+
+  .card-visual {
+    transition: transform 0.4s ease-out;
+  }
+  .card-rotate:hover .card-visual {
+    transform: scale(1.05) rotate(var(--card-rotation, 2deg));
+  }
+
+  /* ── Glassmorphism ── */
+  .glass {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* ── Spring button easing ── */
+  .btn-spring {
+    transition:
+      background-color 0.2s ease-out,
+      color 0.2s ease-out,
+      border-color 0.2s ease-out,
+      padding 0.6s cubic-bezier(.175, .885, .32, 1.275);
   }
 }
 

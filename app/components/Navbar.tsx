@@ -2,13 +2,21 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/projects", label: "Our Work" },
+];
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
-    <nav className="fixed w-full z-50 bg-white border-b border-border">
+    <nav className="fixed w-full z-50 bg-white/90 glass border-b border-border">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* LOGO */}
         <Link href="/" className="flex items-center cursor-pointer">
@@ -16,33 +24,36 @@ export default function Navbar() {
         </Link>
 
         {/* DESKTOP MENU */}
-        <div className="hidden md:flex items-center gap-8">
-          <div className="flex items-center gap-7 text-sm font-medium text-ink-light">
-            {[
-              { href: "/", label: "Home" },
-              { href: "/about", label: "About" },
-              { href: "/projects", label: "Our Work" },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="hover:text-ink transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+        <div className="hidden md:flex items-center gap-6">
+          <div className="flex items-center gap-1 text-sm font-medium">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`px-3 py-1.5 rounded-full transition-all duration-200 ${
+                    isActive
+                      ? "bg-ink text-white"
+                      : "text-ink-light hover:text-ink hover:bg-ink/5"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="flex items-center gap-3">
             <a
               href="/#contact"
-              className="px-4 py-2 text-sm font-medium border border-ink text-ink rounded hover:bg-ink hover:text-white transition-all cursor-pointer"
+              className="btn-spring px-4 py-2 text-sm font-medium border border-ink text-ink rounded-full hover:bg-ink hover:text-white cursor-pointer"
             >
               Talk to Us
             </a>
             <a
               href="/#contact"
-              className="px-4 py-2 text-sm font-medium bg-cta text-white rounded hover:bg-cta-hover transition-all cursor-pointer"
+              className="btn-spring px-4 py-2 text-sm font-medium bg-cta text-white rounded-full hover:bg-cta-hover cursor-pointer"
             >
               Start Your Project
             </a>
@@ -62,32 +73,35 @@ export default function Navbar() {
       {/* MOBILE MENU */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 w-full bg-white border-b border-border p-6 flex flex-col gap-1">
-          {[
-            { href: "/", label: "Home" },
-            { href: "/about", label: "About" },
-            { href: "/projects", label: "Our Work" },
-          ].map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-base font-medium py-3 px-4 text-ink-light hover:text-ink hover:bg-gray-50 rounded transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`text-base font-medium py-3 px-4 rounded-full transition-all duration-200 ${
+                  isActive
+                    ? "bg-ink text-white"
+                    : "text-ink-light hover:text-ink hover:bg-gray-50"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <div className="flex flex-col gap-3 mt-4">
             <a
               href="/#contact"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center px-5 py-3 border border-ink text-ink rounded font-medium hover:bg-ink hover:text-white transition-colors cursor-pointer"
+              className="btn-spring w-full text-center px-5 py-3 border border-ink text-ink rounded-full font-medium hover:bg-ink hover:text-white cursor-pointer"
             >
               Talk to Us
             </a>
             <a
               href="/#contact"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center px-5 py-3 bg-cta text-white rounded font-medium hover:bg-cta-hover transition-colors cursor-pointer"
+              className="btn-spring w-full text-center px-5 py-3 bg-cta text-white rounded-full font-medium hover:bg-cta-hover cursor-pointer"
             >
               Start Your Project
             </a>
