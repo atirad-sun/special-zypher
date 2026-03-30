@@ -1,16 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { ThemeProvider } from "./ThemeContext";
 
-const headingFont = Space_Grotesk({
+const headingFont = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-heading",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 const bodyFont = Inter({
@@ -88,16 +87,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         
-        <ThemeProvider>
-            <Navbar />
-            
-            {/* We wrap the content in 'main' and tell it to grow to fill space */}
-            <main className="flex-grow">
-                {children}
-            </main>
-            
-            <Footer />
-        </ThemeProvider>
+        <Navbar />
+        <main className="flex-grow">
+            {children}
+        </main>
+        <Footer />
       </body>
       <GoogleAnalytics gaId="G-N0FZQC018G" />
     </html>

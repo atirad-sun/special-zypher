@@ -17,55 +17,33 @@ import {
   Hospital,
   TrendingUp,
 } from "lucide-react";
-import { useTheme } from "../ThemeContext";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
-  }),
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const stagger = {
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
 export default function Projects() {
-  const { isDark } = useTheme();
-
   return (
-    <div
-      className={`min-h-screen transition-colors duration-300
-      ${isDark ? "bg-surface-dark text-slate-100" : "bg-slate-50 text-slate-900"}`}
-    >
-      {/* Header */}
-      <section className="pt-32 pb-12 px-6 relative overflow-hidden grain">
-        <div
-          className={`absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none
-          ${isDark ? "bg-brand/[0.06]" : "bg-brand/[0.03]"}`}
-        />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-          >
-            <motion.p variants={fadeUp} custom={0} className="text-brand text-sm font-semibold tracking-widest uppercase mb-4">
+    <div className="min-h-screen bg-paper text-ink">
+      {/* ═══════════════ HERO ═══════════════ */}
+      <section className="pt-32 pb-12 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div initial="hidden" animate="visible" variants={stagger}>
+            <motion.p variants={fadeUp} className="text-sm font-semibold text-ink-muted tracking-widest uppercase mb-4">
               Portfolio
             </motion.p>
             <motion.h1
               variants={fadeUp}
-              custom={1}
-              className="text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-heading)] font-bold tracking-tight mb-4"
+              className="text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-heading)] font-bold italic leading-tight mb-6"
             >
-              Selected{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-light">
-                Work
-              </span>
+              Selected Work
             </motion.h1>
-            <motion.p
-              variants={fadeUp}
-              custom={2}
-              className={`text-lg max-w-2xl ${isDark ? "text-slate-400" : "text-slate-600"}`}
-            >
+            <motion.p variants={fadeUp} className="text-lg text-ink-muted max-w-2xl mx-auto leading-relaxed">
               From National Layer-1 infrastructures to proprietary AI models.
               Here is how we solve complex engineering challenges.
             </motion.p>
@@ -73,12 +51,16 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* CATEGORY A: WEB3 */}
+      {/* Grid pattern hero block */}
+      <section className="px-6 pb-16">
+        <div className="max-w-5xl mx-auto grid-pattern-pink rounded-sm py-16" />
+      </section>
+
+      {/* ═══════════════ WEB3 ═══════════════ */}
       <CategorySection
-        isDark={isDark}
         icon={<Layers className="w-5 h-5" />}
         title="Web3 & Blockchain Ecosystems"
-        accentColor="blue"
+        gridBgClass="grid-pattern-blue"
         projects={[
           {
             icon: <Wallet />,
@@ -113,12 +95,11 @@ export default function Projects() {
         ]}
       />
 
-      {/* CATEGORY B: REGTECH */}
+      {/* ═══════════════ REGTECH ═══════════════ */}
       <CategorySection
-        isDark={isDark}
         icon={<ShieldCheck className="w-5 h-5" />}
         title="RegTech & Digital Identity (DID)"
-        accentColor="emerald"
+        gridBgClass="grid-pattern-green"
         columns={2}
         projects={[
           {
@@ -146,13 +127,11 @@ export default function Projects() {
         ]}
       />
 
-      {/* CATEGORY C: AI & ML */}
+      {/* ═══════════════ AI & ML ═══════════════ */}
       <CategorySection
-        isDark={isDark}
         icon={<BrainCircuit className="w-5 h-5" />}
         title="Artificial Intelligence & ML"
-        accentColor="purple"
-        className="pb-28"
+        gridBgClass="grid-pattern"
         projects={[
           {
             icon: <Scan />,
@@ -187,28 +166,38 @@ export default function Projects() {
         ]}
       />
 
-      {/* CTA */}
-      <section
-        className={`py-24 text-center relative overflow-hidden
-        ${isDark ? "bg-surface-dark-card" : "bg-white"}`}
-      >
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-brand/30 to-transparent absolute top-0" />
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl font-[family-name:var(--font-heading)] font-bold mb-6">
-            Ready to build something complex?
-          </h2>
-          <Link
-            href="/"
-            className="group inline-flex items-center gap-2.5 px-8 py-4 bg-brand text-white rounded-lg font-semibold hover:bg-brand-light transition-all duration-200 shadow-lg shadow-brand/20 hover:shadow-xl hover:shadow-brand/30"
+      {/* ═══════════════ CTA ═══════════════ */}
+      <section className="relative overflow-hidden">
+        <div className="grid-pattern-blue py-24 px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
           >
-            Talk to us
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-        </motion.div>
+            {/* Jasper-style floating card CTA */}
+            <div className="inline-block bg-white border border-border rounded-sm px-16 py-12">
+              <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] font-bold italic text-ink mb-8">
+                Get started
+                <br />
+                with ONE EIGHT X
+              </h2>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link
+                  href="/about"
+                  className="px-6 py-3 border border-ink text-ink font-medium rounded hover:bg-ink hover:text-white transition-all cursor-pointer"
+                >
+                  Learn About Us
+                </Link>
+                <a
+                  href="/#contact"
+                  className="px-6 py-3 bg-cta text-white font-medium rounded hover:bg-cta-hover transition-all cursor-pointer"
+                >
+                  Start Your Project
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
     </div>
   );
@@ -217,42 +206,34 @@ export default function Projects() {
 // ── HELPER COMPONENTS ──
 
 function CategorySection({
-  isDark,
   icon,
   title,
-  accentColor,
+  gridBgClass,
   projects,
   columns = 3,
-  className = "",
 }: any) {
-  const colorMap: Record<string, string> = {
-    blue: "bg-blue-500/10 text-blue-400",
-    emerald: "bg-emerald-500/10 text-emerald-400",
-    purple: "bg-purple-500/10 text-purple-400",
-  };
-
   return (
-    <section className={`py-12 px-6 ${className}`}>
+    <section className="py-16 px-6 border-t border-border">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+          variants={stagger}
         >
-          <motion.div variants={fadeUp} custom={0} className="flex items-center gap-3 mb-8">
-            <div className={`p-2.5 rounded-xl ${colorMap[accentColor]}`}>
+          <motion.div variants={fadeUp} className="flex items-center gap-3 mb-10">
+            <div className={`p-2.5 rounded-sm ${gridBgClass} border border-border text-ink/60`}>
               {icon}
             </div>
-            <h2 className="text-2xl font-[family-name:var(--font-heading)] font-bold">
+            <h2 className="text-2xl font-[family-name:var(--font-heading)] font-bold italic">
               {title}
             </h2>
           </motion.div>
 
           <div className={`grid md:grid-cols-2 ${columns === 3 ? "lg:grid-cols-3" : ""} gap-6`}>
-            {projects.map((project: any, i: number) => (
-              <motion.div key={project.title} variants={fadeUp} custom={i + 1}>
-                <ProjectCard isDark={isDark} {...project} />
+            {projects.map((project: any) => (
+              <motion.div key={project.title} variants={fadeUp}>
+                <ProjectCard {...project} />
               </motion.div>
             ))}
           </div>
@@ -262,48 +243,31 @@ function CategorySection({
   );
 }
 
-function ProjectCard({ icon, title, desc, tags, details, isDark }: any) {
+function ProjectCard({ icon, title, desc, tags, details }: any) {
   return (
-    <div
-      className={`group p-6 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:-translate-y-1 gradient-border
-      ${
-        isDark
-          ? "bg-surface-dark-card border-white/[0.06]"
-          : "bg-white border-slate-200 hover:shadow-xl"
-      }`}
-    >
-      <div
-        className={`w-11 h-11 rounded-xl flex items-center justify-center mb-5 transition-transform duration-200 group-hover:scale-110
-        ${isDark ? "bg-brand/10 text-brand-light" : "bg-brand/10 text-brand"}`}
-      >
-        {React.cloneElement(icon, { className: "w-5 h-5" })}
+    <div className="border border-border rounded-sm flex flex-col h-full bg-white hover:shadow-md transition-shadow">
+      <div className="p-6 flex-grow">
+        <div className="w-10 h-10 border border-border rounded-sm flex items-center justify-center text-brand mb-5">
+          {React.cloneElement(icon, { className: "w-5 h-5" })}
+        </div>
+
+        <h3 className="text-lg font-bold text-ink mb-2">{title}</h3>
+        <p className="text-sm text-ink-muted leading-relaxed mb-4">{desc}</p>
+
+        <ul className="text-sm text-ink-muted space-y-1.5 mb-4">
+          {details.map((item: string, i: number) => (
+            <li key={i} className="flex gap-2">
+              <span className="text-brand mt-0.5 shrink-0">•</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <h3 className={`text-lg font-[family-name:var(--font-heading)] font-bold mb-2.5 ${isDark ? "text-slate-100" : "text-slate-900"}`}>
-        {title}
-      </h3>
-      <p className={`text-sm mb-5 flex-grow leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>
-        {desc}
-      </p>
-
-      {/* Details */}
-      <ul className={`text-sm mb-5 space-y-2 ${isDark ? "text-slate-500" : "text-slate-500"}`}>
-        {details.map((item: string, i: number) => (
-          <li key={i} className="flex gap-2.5">
-            <span className="text-brand mt-0.5 shrink-0">•</span>
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-
       {/* Tags */}
-      <div className={`flex flex-wrap gap-2 mt-auto pt-4 border-t ${isDark ? "border-white/[0.06]" : "border-slate-100"}`}>
+      <div className="px-6 pb-5 pt-4 border-t border-border flex flex-wrap gap-2">
         {tags.map((tag: string) => (
-          <span
-            key={tag}
-            className={`text-xs px-2.5 py-1 rounded-md font-medium
-            ${isDark ? "bg-brand/[0.06] text-brand-light border border-brand/10" : "bg-brand/[0.04] text-brand border border-brand/10"}`}
-          >
+          <span key={tag} className="text-xs px-2.5 py-1 border border-border rounded-sm text-ink-muted">
             {tag}
           </span>
         ))}
