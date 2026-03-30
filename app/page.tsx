@@ -47,7 +47,7 @@ export default function Home() {
           </p>
           <button
             onClick={() => window.location.reload()}
-            className="px-6 py-2.5 bg-cta text-white rounded font-medium hover:bg-cta-hover transition-all cursor-pointer"
+            className="btn-spring px-6 py-2.5 bg-cta text-white rounded-full font-medium hover:bg-cta-hover cursor-pointer"
           >
             Back to Home
           </button>
@@ -67,7 +67,7 @@ export default function Home() {
           className="text-center mb-8"
         >
           <span className="inline-flex items-center gap-2 text-sm">
-            <span className="px-2 py-0.5 bg-red-600 text-white text-xs font-bold rounded-sm">
+            <span className="px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full">
               Now available
             </span>
             <span className="text-ink-muted">
@@ -85,7 +85,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-heading)] font-bold leading-[1.1] mb-6 text-ink"
+            className="text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-heading)] font-bold leading-[1.05] tracking-[-0.03em] mb-6 text-ink"
           >
             Put digital innovation
             <br />
@@ -108,13 +108,13 @@ export default function Home() {
           >
             <a
               href="/projects"
-              className="px-6 py-3 border border-ink text-ink font-medium rounded hover:bg-ink hover:text-white transition-all cursor-pointer"
+              className="btn-spring px-6 py-3 border border-ink text-ink font-medium rounded-full hover:bg-ink hover:text-white cursor-pointer"
             >
               View Our Work
             </a>
             <a
               href="/#contact"
-              className="px-6 py-3 bg-cta text-white font-medium rounded hover:bg-cta-hover transition-all cursor-pointer"
+              className="btn-spring px-6 py-3 bg-cta text-white font-medium rounded-full hover:bg-cta-hover cursor-pointer"
             >
               Start Your Project
             </a>
@@ -188,7 +188,7 @@ export default function Home() {
             <motion.p variants={fadeUp} className="text-sm font-semibold text-ink-muted tracking-widest uppercase mb-4">
               The ONE EIGHT X Platform
             </motion.p>
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-[family-name:var(--font-heading)] font-bold text-ink italic leading-tight">
+            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-[family-name:var(--font-heading)] font-bold text-ink italic leading-tight tracking-[-0.02em]">
               The execution platform for
               <br />intelligent digital solutions
             </motion.h2>
@@ -200,7 +200,7 @@ export default function Home() {
             <motion.div variants={fadeUp} className="mt-8">
               <a
                 href="/projects"
-                className="inline-flex items-center gap-1 px-6 py-3 border border-ink text-ink font-medium rounded hover:bg-ink hover:text-white transition-all cursor-pointer"
+                className="btn-spring inline-flex items-center gap-1 px-6 py-3 border border-ink text-ink font-medium rounded-full hover:bg-ink hover:text-white cursor-pointer"
               >
                 Explore The Platform
               </a>
@@ -215,7 +215,7 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="grid md:grid-cols-3 gap-6"
+            className="grid md:grid-cols-3 gap-6 card-grid"
           >
             {[
               {
@@ -243,10 +243,10 @@ export default function Home() {
               <motion.div
                 key={service.title}
                 variants={fadeUp}
-                className="border border-border rounded-sm overflow-hidden group"
+                className="border border-border rounded-sm overflow-hidden group card-rotate"
               >
-                <div className={`${service.bgClass} p-8 flex items-center justify-center h-48`}>
-                  <div className="text-ink/60 group-hover:scale-110 transition-transform duration-300">
+                <div className={`${service.bgClass} p-8 flex items-center justify-center h-48 overflow-hidden`}>
+                  <div className="text-ink/60 card-visual">
                     {service.icon}
                   </div>
                 </div>
@@ -375,7 +375,7 @@ export default function Home() {
               <motion.div variants={fadeUp}>
                 <a
                   href="/about"
-                  className="inline-flex items-center gap-1 px-6 py-3 border border-ink text-ink font-medium rounded hover:bg-ink hover:text-white transition-all cursor-pointer"
+                  className="btn-spring inline-flex items-center gap-1 px-6 py-3 border border-ink text-ink font-medium rounded-full hover:bg-ink hover:text-white cursor-pointer"
                 >
                   Explore Trust
                 </a>
@@ -467,7 +467,7 @@ export default function Home() {
                 <button
                   type="submit"
                   disabled={state.submitting}
-                  className="w-full py-4 bg-cta text-white font-semibold rounded-sm hover:bg-cta-hover transition-all flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer"
+                  className="btn-spring w-full py-4 bg-cta text-white font-semibold rounded-full hover:bg-cta-hover flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer"
                 >
                   {state.submitting ? "Sending..." : "Send Message"}
                   {!state.submitting && <Send className="w-4 h-4" />}

@@ -32,7 +32,7 @@ export default function About() {
             </motion.p>
             <motion.h1
               variants={fadeUp}
-              className="text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-heading)] font-bold leading-tight mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-heading)] font-bold leading-[1.05] tracking-[-0.03em] mb-6"
             >
               <span className="inline bg-highlight-green/20 px-2">Elevate All Technology</span>
               <br />
@@ -58,7 +58,7 @@ export default function About() {
             </motion.p>
             <motion.h2
               variants={fadeUp}
-              className="text-4xl md:text-5xl font-[family-name:var(--font-heading)] font-bold italic leading-tight mb-8"
+              className="text-4xl md:text-5xl font-[family-name:var(--font-heading)] font-bold italic leading-tight tracking-[-0.02em] mb-8"
             >
               At ONE EIGHT X, we&apos;re closing the gap between &quot;idea&quot; and &quot;impact&quot;
             </motion.h2>
@@ -85,7 +85,7 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="grid md:grid-cols-3 gap-6"
+            className="grid md:grid-cols-3 gap-6 card-grid"
           >
             {[
               {
@@ -110,10 +110,10 @@ export default function About() {
               <motion.div
                 key={item.title}
                 variants={fadeUp}
-                className="border border-border rounded-sm overflow-hidden group"
+                className="border border-border rounded-sm overflow-hidden group card-rotate"
               >
-                <div className={`${item.bgClass} p-8 flex items-center justify-center h-40`}>
-                  <div className="text-ink/50 group-hover:scale-110 transition-transform duration-300">
+                <div className={`${item.bgClass} p-8 flex items-center justify-center h-40 overflow-hidden`}>
+                  <div className="text-ink/50 card-visual">
                     {React.cloneElement(item.icon, { className: "w-10 h-10" })}
                   </div>
                 </div>
@@ -177,7 +177,7 @@ export default function About() {
             <motion.p variants={fadeUp} className="text-sm font-semibold text-ink-muted tracking-widest uppercase mb-3">
               Our Executive Leadership Team
             </motion.p>
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-[family-name:var(--font-heading)] font-bold italic mb-12">
+            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-[family-name:var(--font-heading)] font-bold italic tracking-[-0.02em] mb-12">
               Leading the way to
               <br />engineering excellence
             </motion.h2>
@@ -239,7 +239,7 @@ export default function About() {
                     {founder.tags.map((tag: string) => (
                       <span
                         key={tag}
-                        className="text-xs px-2.5 py-1 border border-border rounded-sm text-ink-muted"
+                        className="text-xs px-3 py-1 bg-ink/5 rounded-full text-ink-muted"
                       >
                         {tag}
                       </span>
